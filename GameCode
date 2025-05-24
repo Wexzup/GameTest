@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Jeu Web</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const player = {
+            x: 50,
+            y: 50,
+            width: 50,
+            height: 50,
+            color: 'blue',
+            speed: 5
+        };
+
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function update() {
+            drawPlayer();
+            requestAnimationFrame(update);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowUp') {
+                player.y -= player.speed;
+            } else if (event.key === 'ArrowDown') {
+                player.y += player.speed;
+            } else if (event.key === 'ArrowLeft') {
+                player.x -= player.speed;
+            } else if (event.key === 'ArrowRight') {
+                player.x += player.speed;
+            }
+        });
+
+        update();
+    </script>
+</body>
+</html>
